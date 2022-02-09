@@ -51,11 +51,12 @@
 				</div>
 
 				<div class="list-group">
-					<div class="list-group-item" v-for="c in comments">
+					<div class="list-group-item" v-for="(c, index) in comments">
 						<span class="comment__author">Author: <b>{{c.name}}</b></span>
 						<p>{{c.msg}}</p>
 						<div>
-							<a href="#" title="del">Delete</a>
+							<a href="#" title="del" v-on:click='delComment(index)'>
+							 >Delete</a>
 						</div>
 					</div>
 				</div>
@@ -63,12 +64,7 @@
 			</div>`,
 			data() {
 				return {
-					comments: [
-						{  /* apenas um obj que alimenta o span */
-							name: 'Ayrton Senna',
-							msg: 'Mensagem de teste'
-						},
-					],
+					comments: [],
 
 					/* estados usados dentro do v-on:click,
 									eles são atualizados via v-model na tag html */
@@ -78,9 +74,24 @@
 			},
 			methods: {
 				addComment() { /* v-on:click -> disparada ao clicar */
-					console.log('addComment called');
-					console.log(this.name);
-					console.log(this.msg);
+
+					(this.name.trim() == `` || this.msg.trim() == ``
+						|| this.name.trim() + this.msg.trim() == ``) ?
+						alert('Please, fill the fields!')
+						:
+						this.comments.push({
+							name: this.name,
+							msg: this.msg
+						});
+
+					// clean the fields
+					this.name = '';
+					this.msg = '';
+				},
+
+				//remove comment from array from v-for loop
+				delComment(index) {
+					this.comments.splice(index, 1);
 				}
 			}
 		})
