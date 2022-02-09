@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+		integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+
+	<!-- import jquery: -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<title>Document</title>
+
+</head>
+
+<body>
+	<div id="app"></div>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+	<script>
+		new Vue({
+			el: '#app',
+			template: `
+			<div class="container">
+				<h1>Comments</h1>
+				<hr />
+
+				<div class="form-todo  form-group">
+					<p>
+						<input type="text" class="form-control" v-model='name'
+						placeholder="type your name here!" name='author' />
+					</p>
+					<p>
+						<textarea name="message" placeholder="Comment" v-model='msg'
+						 class="form-control"></textarea>
+					</p>
+					<button type='submit' v-on:click='addComment'
+					class="btn btn-primary">Add Comment</button>
+				</div>
+
+				<div class="list-group">
+					<div class="list-group-item" v-for="c in comments">
+						<span class="comment__author">Author: <b>{{c.name}}</b></span>
+						<p>{{c.msg}}</p>
+						<div>
+							<a href="#" title="del">Delete</a>
+						</div>
+					</div>
+				</div>
+				<hr />
+			</div>`,
+			data() {
+				return {
+					comments: [
+						{  /* apenas um obj que alimenta o span */
+							name: 'Ayrton Senna',
+							msg: 'Mensagem de teste'
+						},
+					],
+
+					/* estados usados dentro do v-on:click,
+									eles são atualizados via v-model na tag html */
+					name: '',
+					msg: ''
+				}
+			},
+			methods: {
+				addComment() { /* v-on:click -> disparada ao clicar */
+					console.log('addComment called');
+					console.log(this.name);
+					console.log(this.msg);
+				}
+			}
+		})
+
+	</script>
+</body>
+
+</html>
