@@ -55,8 +55,8 @@
 						<span class="comment__author">Author: <b>{{c.name}}</b></span>
 						<p>{{c.msg}}</p>
 						<div>
-							<a href="#" title="del" v-on:click='delComment(index)'>
-							 >Delete</a>
+							<a href="#" title="del" v-on:click.prevent='delComment(index)'>
+							 Delete</a>
 						</div>
 					</div>
 				</div>
