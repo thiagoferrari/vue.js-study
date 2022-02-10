@@ -51,7 +51,7 @@
 				</div>
 
 				<div class="list-group">
-					<div class="list-group-item" v-for="(c, index) in comments">
+					<div class="list-group-item" v-for="(c, index) in allComments">
 						<span class="comment__author">Author: <b>{{c.name}}</b></span>
 						<p>{{c.msg}}</p>
 						<div>
@@ -75,9 +75,8 @@
 			methods: {
 				addComment() { /* v-on:click -> disparada ao clicar */
 
-					(this.name.trim() == `` || this.msg.trim() == ``
-						|| this.name.trim() + this.msg.trim() == ``) ?
-						alert('Please, fill the fields!')
+					(this.msg.trim() == ``) ?
+						alert('Please, fill the comment filed!')
 						:
 						this.comments.push({
 							name: this.name,
@@ -93,7 +92,28 @@
 				delComment(index) {
 					this.comments.splice(index, 1);
 				}
+			},
+			computed: { /* computed serve para tirar a logica* do html (v-for) */
+				allComments() { /* allComments esta dentro do v-for */
+					return this.comments.map(c => ({
+						...c, name: c.name.trim() === `` ? `Anonymous` : c.name
+					}))
+				}
+				/* neste computed fizemos o codigo do Anonymous
+				ele poderia ser feito dentro do v-for do html, mas
+				isso é melhor fazer dentro do computed */
+			},
+			watch: {
+				/* nessa funcao comments() eh preciso ter o
+				mesmo nome do array dentro do data()
+				que estivermos dando watch (vigiado)  */
+				comments(value) {
+					console.log('value :>> ', value); //log do objeto alterado
+				}
 			}
+			/* veja sobre a diferenca entre computed e watch:
+			v2.vuejs.org/v2/guide/computed.html#Computed-vs-Watched-Property
+			 */
 		})
 
 	</script>
