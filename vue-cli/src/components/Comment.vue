@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import FormTodo from "./FormTodo";
+import FormTodo from "./FormTodo.vue"
 export default {
   components: {
     FormTodo,
