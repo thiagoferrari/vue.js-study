@@ -1,0 +1,22 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+<div id="app">
+	<ul>
+		<li v-for="(cor, i) in cores" :key='i'>
+			{{ cor }}, index no js: {{ i }}
+		</li>
+	</ul>
+
+	<button @click="cores.push('branca')">
+		Add Cor Branca
+	</button>
+</div>
+
+<script>
+	new Vue({
+		el: '#app',
+		data: {
+			cores: ['blue', 'green', 'yellow', 'red'],
+		},
+	})
+</script>

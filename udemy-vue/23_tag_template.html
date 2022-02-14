@@ -1,0 +1,38 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+<div id="app">
+	<!-- v-if(remove elemento da DOM) -performace
+			 v-show(trabalha com display: 'none') +limitações -->
+	<template v-if="logado">
+		<p>Usuário Logado: {{ nome }}</p>
+		<p>perfil: admin</p>
+	</template>
+
+	<p v-else-if='anonimo'>Navegando como anonimo</p>
+	<p v-else>Nenhum Usuário logado!</p>
+	<button @click='logado = !logado'>
+		{{ logado ? 'Deslogar' : 'Logar' }}
+	</button>
+	<input type="checkbox" id="c" v-model='anonimo'>
+	<label for="c">Anonimo</label>
+
+	<hr>
+
+	<footer v-show='logado'>
+		Desenvolvido para vc :)
+	</footer>
+	<footer v-show='!logado'>
+		Desenvolvido par vc que é DEV! :)
+	</footer>
+</div>
+
+<script>
+	new Vue({
+		el: '#app',
+		data: {
+			nome: 'Maria',
+			logado: false,
+			anonimo: false
+		},
+	})
+</script>

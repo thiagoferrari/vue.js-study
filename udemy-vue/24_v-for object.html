@@ -1,0 +1,29 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+<div id="app">
+	<ul>
+		<li v-for="(pessoa, i) in pessoas">
+			<span v-for="(valor, chave, index) in pessoa">
+				{{ valor }} = {{ chave }}, <b>index dentro do js: {{ index }}</b>,
+			</span>
+		</li>
+	</ul>
+</div>
+
+<script>
+	new Vue({
+		el: '#app',
+		data: {
+			pessoas: [
+				{ nome: 'Maria', idade: 20, peso: 56 },
+				{ nome: 'João', idade: 25, peso: 70 },
+				{ nome: 'Pedro', idade: 30, peso: 80 },
+				{ nome: 'Ana', idade: 35, peso: 90 },
+				{ nome: 'José', idade: 40, peso: 100 },
+				{ nome: 'Carlos', idade: 45, peso: 110 },
+				{ nome: 'Julia', idade: 50, peso: 120 },
+				{ nome: 'Paulo', idade: 55, peso: 130 },
+			],
+		},
+	})
+</script>
